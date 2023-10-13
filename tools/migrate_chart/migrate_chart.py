@@ -60,7 +60,7 @@ class ChartV2:
 
     def migrate(self, hostname, username, password):
         res = self.__check_exist(hostname, username, password)
-        if res.status_code == 200:
+        if res.status_code == 200 and res.json().get("type", "") == "CHART":
             raise Exception("Artifact already exist in harbor")
         if res.status_code == 401:
             raise Exception(res.reason)
